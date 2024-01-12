@@ -239,166 +239,27 @@
             max-width: 1280px;
             margin: auto;
         }
-
     </style>
 </head>
 <body class="c6 doc-content">
-    <p class="c1 c2"><span class="c3"></span></p>
-    <p class="c1"></p>
-  <span class="c1 c3">Pretend this is just the original flapjack page... This is just a placeholder.  GL coding.</span>
-     <!-- Login/Logout/Wipe Users Section -->
-        <div class="section login-section">
-            <form id="login-form">
+    <div class="content">
+        <p class="c1 c2"><span class="c3"></span></p>
+        <p class="c1"></p>
+        <span class="c1 c3">Pretend this is just the original flapjack page... This is just a placeholder.  GL coding.</span>
+
+        <!-- New login section -->
+        <div>
+            <h2>Login</h2>
+            <form action="/login" method="post">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
-                <br>
+
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-                <br>
-                <button type="button" onclick="handleLogin()">Log In</button>
-                <button type="button" onclick="handleSignUp()">Sign Up</button>
+
+                <input type="submit" value="Login">
             </form>
-
-            <button id="logout-button" onclick="handleLogout()" style="display: none;">Log Out</button>
-
-            <!-- Wipe Users Section -->
-            <div id="wipe-users-section" style="text-align: center; display: none;">
-                <button id="wipe-users-button" onclick="wipeUsers()">Wipe Users</button>
-                <ul id="user-list"></ul>
-            </div>
         </div>
     </div>
-
-    <script>
-        // Load users from localStorage or initialize an empty array
-        var users = JSON.parse(localStorage.getItem("users")) || [];
-        // Current logged-in user (null if not logged in)
-        var currentUser = null;
-
-        // JavaScript code for handling sign-up functionality
-        function handleSignUp() {
-            var newUsername = document.getElementById("username").value;
-            var newPassword = document.getElementById("password").value;
-
-            // Check if the username is already taken
-            if (users.some(user => user.username === newUsername)) {
-                displayMessage("Username is already taken. Please choose another.");
-                return;
-            }
-
-            // Add the new user to the array
-            users.push({ username: newUsername, password: newPassword });
-            saveUsersToStorage();
-            displayMessage("Sign-up successful! Now you can sign in with your new credentials.");
-
-            // Clear the form
-            document.getElementById("username").value = "";
-            document.getElementById("password").value = "";
-        }
-
-        // JavaScript code for handling sign-in functionality
-        function handleLogin() {
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            // Check if the username and password match any user in the array
-            var user = users.find(user => user.username === username && user.password === password);
-
-            if (user) {
-                // Successful sign-in
-                currentUser = user;
-                displayMessage("Sign-in successful! Welcome, " + user.username + ".");
-                toggleLoginLogout(true);
-                checkAndShowIntelSection();  // Check and show Intel section based on the username
-            } else {
-                // Failed sign-in
-                displayMessage("Invalid username or password. Try again.");
-            }
-        }
-
-        // JavaScript code for handling logout functionality
-        function handleLogout() {
-            currentUser = null;
-            toggleLoginLogout(false);
-            toggleIntelSection(false); // Hide Intel section on logout
-            displayMessage("Logged out successfully.");
-        }
-
-        // JavaScript code for wiping users
-        function wipeUsers() {
-            if (currentUser && currentUser.username === "Matthew") {
-                // Display user data before wiping
-                displayUserData();
-
-                // Wipe users
-                users = [];
-                saveUsersToStorage();
-                displayMessage("All user data wiped successfully.");
-
-                // Clear user list
-                clearUserList();
-            } else {
-                displayMessage("You don't have permission to wipe users.");
-            }
-        }
-
-        // Function to display user data before wiping
-        function displayUserData() {
-            var userList = document.getElementById("user-list");
-            userList.innerHTML = "";
-            
-            users.forEach(user => {
-                var listItem = document.createElement("li");
-                listItem.textContent = "Username: " + user.username + ", Password: " + user.password;
-                userList.appendChild(listItem);
-            });
-        }
-
-        // Function to clear the user list
-        function clearUserList() {
-            var userList = document.getElementById("user-list");
-            userList.innerHTML = "";
-        }
-
-        // Function to toggle login/logout elements based on the user's login status
-        function toggleLoginLogout(isLoggedIn) {
-            var loginForm = document.getElementById("login-form");
-            var logoutButton = document.getElementById("logout-button");
-
-            if (isLoggedIn) {
-                loginForm.style.display = "none";
-                logoutButton.style.display = "block";
-            } else {
-                loginForm.style.display = "block";
-                logoutButton.style.display = "none";
-            }
-        }
-
-        // Function to toggle the visibility of the Intel section
-        function toggleIntelSection(isVisible) {
-            var intelSection = document.querySelector(".intel-section");
-            intelSection.style.display = isVisible ? "block" : "none";
-        }
-
-        // Function to display messages
-        function displayMessage(message) {
-            var messagesContainer = document.getElementById("messages");
-            messagesContainer.innerHTML = "<p>" + message + "</p>";
-        }
-
-        // Function to save users to localStorage
-        function saveUsersToStorage() {
-            localStorage.setItem("users", JSON.stringify(users));
-        }
-
-        // Check if the user is Matthew or Flipside and show the Intel section
-        function checkAndShowIntelSection() {
-            if (currentUser && (currentUser.username === "Matthew" || currentUser.username === "Flipside")) {
-                toggleIntelSection(true);
-            } else {
-                toggleIntelSection(false);
-            }
-        }
-    </script>
 </body>
 </html>
