@@ -239,7 +239,49 @@
             max-width: 1280px;
             margin: auto;
         }
+
+        /* New login section styles */
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check if the provided username and password match the allowed accounts
+            if (
+                (username === "FlapjckCEO" && password === "flapjck@)!!") ||
+                (username === "FlapjckConcepter" && password === "flapjck0100011101010011") ||
+                (username === "FlapjckLeadCreative" && password === "flapjckezzywezzy")
+            ) {
+                alert("Login successful!");
+                // You can redirect the user to another page or perform other actions here
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+    </script>
 </head>
 <body class="c6 doc-content">
     <div class="content">
@@ -250,14 +292,14 @@
         <!-- New login section -->
         <div>
             <h2>Login</h2>
-            <form action="/login" method="post">
+            <form>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <input type="submit" value="Login">
+                <button type="button" onclick="login()">Login</button>
             </form>
         </div>
     </div>
