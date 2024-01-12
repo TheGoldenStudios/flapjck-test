@@ -259,27 +259,29 @@
 
         button {
             padding: 10px;
-            background-color: #ffffff;
-            color: #000000;
+            background-color: #007bff;
+            color: #fff;
             cursor: pointer;
         }
 
         .message {
             margin-top: 15px;
             font-size: 14px;
-            color: #ffffff; /* White color for 'login successful' */
         }
-        .message2 {
-            margin-top: 15px;
-            font-size: 14px
-            color: #ff0000; /* Red color for 'Invalid username or password. Please tr again' */
+
+        .success {
+            color: #ffffff; /* White color for success message */
+        }
+
+        .error {
+            color: #ff0000; /* Red color for error message */
+        }
     </style>
     <script>
         function login() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
             var messageElement = document.getElementById("message");
-            var messageElement2 = document.getElementById("message2);
 
             // Check if the provided username and password match the allowed accounts
             if (
@@ -287,10 +289,14 @@
                 (username === "FlapjckConcepter" && password === "flapjck0100011101010011") ||
                 (username === "FlapjckLeadCreative" && password === "flapjckezzywezzy")
             ) {
-                messageElement.textContent = "Login successful!";
+                messageElement.textContent = "Login Successful!";
+                messageElement.classList.remove("error");
+                messageElement.classList.add("success");
                 // You can redirect the user to another page or perform other actions here
             } else {
-                messageElement2.textContent = "Invalid username or password. Please try again.";
+                messageElement.textContent = "Invalid username or password. Please try again.";
+                messageElement.classList.remove("success");
+                messageElement.classList.add("error");
             }
         }
     </script>
