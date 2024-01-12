@@ -292,7 +292,9 @@
                 messageElement.textContent = "Login Successful!";
                 messageElement.classList.remove("error");
                 messageElement.classList.add("success");
-                // You can redirect the user to another page or perform other actions here
+
+                // Redirect to "messageindex.html"
+                window.location.href = "messageindex.html";
             } else {
                 messageElement.textContent = "Invalid username or password. Please try again.";
                 messageElement.classList.remove("success");
