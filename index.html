@@ -240,6 +240,7 @@
             margin: auto;
         }
 
+        /* New login section styles */
         form {
             margin-top: 20px;
             display: flex;
@@ -262,11 +263,18 @@
             color: #fff;
             cursor: pointer;
         }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #ff0000; /* Red color for error message, you can customize */
+        }
     </style>
     <script>
         function login() {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
+            var messageElement = document.getElementById("message");
 
             // Check if the provided username and password match the allowed accounts
             if (
@@ -274,10 +282,10 @@
                 (username === "FlapjckConcepter" && password === "flapjck0100011101010011") ||
                 (username === "FlapjckLeadCreative" && password === "flapjckezzywezzy")
             ) {
-                alert("Login successful!");
+                messageElement.textContent = "Login successful!";
                 // You can redirect the user to another page or perform other actions here
             } else {
-                alert("Invalid username or password. Please try again.");
+                messageElement.textContent = "Invalid username or password. Please try again.";
             }
         }
     </script>
@@ -300,8 +308,9 @@
 
                 <button type="button" onclick="login()">Login</button>
             </form>
+
+            <div id="message" class="message"></div>
         </div>
     </div>
 </body>
 </html>
-         
